@@ -1,0 +1,68 @@
+<div class="container">
+    <form #partForm="ngForm" (submit)="submitForm()">
+        <h4>{{getPageTitle()}}</h4>
+        <div class="row pt-4 pb-3">
+            <label for="name" class="col-2">Name:</label>
+            <input class="col-5" name="name" id="name" type="text" [(ngModel)]="part.name">
+        </div>
+        <div class="row py-3">
+            <label for="partNumber" class="col-2">Part Number:</label>
+            <input class="col-5" name="partNumber" id="partNumber" type="text" [(ngModel)]="part.partNumber">
+        </div>
+        <div class="row py-3">
+            <label for="price" class="col-2">Price ($):</label>
+            <input class="col-5" id="price" name="price" type="number" [(ngModel)]="part.price">
+        </div>
+        <div class="row py-3">
+            <label for="category" class="col-2">Category:</label>
+            <input class="col-5" name="category" id="category" type="text" [(ngModel)]="part.category">
+        </div>
+        <div class="row py-3">
+            <label for="brand" class="col-2">Brand:</label>
+            <input class="col-5" name="brand" id="brand" type="text" [(ngModel)]="part.brand">
+        </div>
+        <div class="row mx-0 px-0 py-3">
+            <h5 class="px-0 mx-0">Compatible Models:</h5>
+            <div class="col-11 offset-1">
+                <div class="container mx-0 px-0 py-3">
+                    <div *ngFor="let compatibleModel of part.compatibleModels; index as i;">
+                        <div class="row py-1">
+                            <label class="col-1" for="make" class="col-2">Make</label>
+                            <input class="col-5" id="make" name="make_{{i}}" [(ngModel)]="compatibleModel.make">
+                            <span class="col-3 ps-4">
+                                <button type="button"  title="Remove compatible model"
+                                    class="btn btn-outline btn-sm btn-danger" 
+                                    (click)="removeCompatibleModel(compatibleModel)">
+                                    Remove Model
+                                </button>
+                            </span>
+                        </div>
+                        <div class="row py-1">
+                            <label class="col-2" for="model" class="col-2">Model</label>
+                            <input class="col-5" id="model" name="model_{{i}}" [(ngModel)]="compatibleModel.modelCSV"> 
+                        </div>
+                        <div class="row py-1">
+                            <label class="col-2" for="body" class="col-2">Body</label>
+                            <textarea class="col-5" id="body" name="body_{{i}}" [(ngModel)]="compatibleModel.bodyCSV"></textarea>
+                        </div>
+                        <div class="row py-1">
+                            <label class="col-2" for="year" class="col-2">Year</label>
+                            <textarea class="col-5" id="year" name="year_{{i}}" [(ngModel)]="compatibleModel.yearCSV"></textarea>
+                        </div>
+                        <hr>
+                    </div>
+                    <div>
+                        <button type="button" title="Add compatible model"
+                            class="pe-2 btn btn-outline btn-sm btn-warning" (click)="addCompatibleModel()">
+                            Add Model
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container py-3 mx-0 px-0">
+            <button [disabled]="!partForm.valid" class="pe-2 btn btn-outline btn-sm btn-primary"
+                type="submit">{{getSubmitBtnTitle()}}</button>
+        </div>
+    </form>
+</div>

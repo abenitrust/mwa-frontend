@@ -1,0 +1,26 @@
+<div class="container my-4  mx-0 px-0 ">
+    
+    <button [disabled]="this.page.start === 1"
+             class="btn btn-outline btn-sm btn-primary me-2" 
+            (click)="start()">
+                &lt;&lt;
+    </button>
+    <button [disabled]="this.page.start === 1"
+             class="btn btn-outline btn-sm btn-primary me-2" 
+            (click)="prev()">
+                &lt;
+    </button>
+    <button [disabled]="lastPage() === true"
+            class="btn btn-outline btn-sm btn-primary me-2" 
+            (click)="next()">
+                &gt;
+    </button>
+    <button [disabled]="lastPage() === true"
+             class="btn btn-outline btn-sm btn-primary me-2" 
+            (click)="end()">
+                &gt;&gt;
+    </button>
+    <select class="pb-2" [disabled]="countSelectorDisabled() === true"  [ngModel]="page.count"  (ngModelChange)="countChanged($event)">
+        <option *ngFor="let count of countOptions" [value]="count">{{count}}</option>
+    </select>
+</div>

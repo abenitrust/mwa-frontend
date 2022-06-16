@@ -1,0 +1,11 @@
+header {
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    left: 0;
+    font-size: larger;
+}
+
+main {
+    padding-top: 2em;
+}

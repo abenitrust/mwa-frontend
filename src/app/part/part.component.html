@@ -1,0 +1,62 @@
+<div class="py-1">
+    <h3>Automotive parts</h3>
+    <h5 class="my-5 text-danger" *ngIf="error.message">{{"Error occurred. Refresh page!"}}</h5>
+    <div class="mt-5" *ngIf="!error.message">
+        <div class="px-0 mx-0 container">
+            <dl class="row">
+                <dt class="col-2">Name: </dt>
+                <dd class="col-10">
+                    {{part.name}}
+            </dl>
+            <dl class="row">
+                <dt class="col-2">Part Number: </dt>
+                <dd class="col-10">{{part.partNumber}}</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-2">Price: </dt>
+                <dd class="col-10">{{part.price | currency}}</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-2">Category: </dt>
+                <dd class="col-10">{{part.category}}</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-2">Brand: </dt>
+                <dd class="col-10">{{part.brand}}</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-2">Compatible Models: </dt>
+                <dd class="col-10">
+
+                    <div *ngFor="let compatibleModel of part.compatibleModels">
+                        <dl class="row my-0">
+                            <dt class="col-2">Make: </dt>
+                            <dd class="col-10">{{compatibleModel.make}}</dd>
+                        </dl>
+                        <dl class="row my-0">
+                            <dt class="col-2">Model: </dt>
+                            <dd class="col-10">{{compatibleModel.model.join(", ")}}</dd>
+                        </dl>
+                        <dl class="row my-0">
+                            <dt class="col-2">Body: </dt>
+                            <dd class="col-10">{{compatibleModel.body.join(", ")}}</dd>
+                        </dl>
+                        <dl class="row my-0">
+                            <dt class="col-2">Year: </dt>
+                            <dd class="col-10">{{compatibleModel.year.join(", ")}}</dd>
+                        </dl>
+                        <hr class="">
+                    </div>
+                </dd>
+            </dl>
+            <div class="action buttons my-3">
+                <button class="btn btn-outline btn-sm btn-warning me-2" (click)="edit(part._id)">
+                    Edit
+                </button>
+                <button class="btn btn-outline btn-sm btn-danger" (click)="delete(part._id)">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
