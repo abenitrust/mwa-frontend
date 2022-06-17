@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
   handleGetUserSuccess(message: Message) {
     this.auth.login(message.token);
-    this.toastr.success("User successfully created!");
+    this.toastr.success("Login successful!");
     this.router.navigate(['parts']);
     this.error = new Message();
   }

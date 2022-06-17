@@ -33,12 +33,12 @@ export class UserComponent implements OnInit {
   }
 
   handleGetUserSuccess(user: User) {
-    this.user = user
+    this.user = user;
     this.error = new Message();
   }
 
   handleGetUserError(error: Message) {
-    this.toastr.error(error.error);
+    this.toastr.error("Error occurred, try reloading!");
   }
 
   edit(id: number | string): void {

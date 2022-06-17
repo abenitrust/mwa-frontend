@@ -100,7 +100,7 @@ export class ApiService {
   }
 
   deleteUser(id: string | number): Observable<Message> {
-    return this.http.delete<Message>(`${this.#partApiUrl}/${id}`)
+    return this.http.delete<Message>(`${this.#userApiUrl}/${id}`)
       .pipe(
         catchError(this.handleError)
       )
