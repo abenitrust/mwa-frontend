@@ -59,6 +59,10 @@ export class CreateEditUserComponent implements OnInit {
   }
 
   createNewUser(): void {
+    if(this.user.password !== this.user.confirmPassord) {
+      this.toastr.error("Password don't match!");
+      return;
+    }
     this.apiService.addUser(this.user).subscribe({
       next: (message) => this.handleCreateSuccess(message),
       error: (error) => this.handleError(error.error)

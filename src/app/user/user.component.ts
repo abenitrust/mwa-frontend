@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../api.service';
 import { Message } from '../model/message';
 import { User } from '../model/user';
+
+
+
 
 @Component({
   selector: 'app-user',
@@ -13,6 +16,9 @@ import { User } from '../model/user';
 export class UserComponent implements OnInit {
   user: User = new User();
   error: Message = new Message();
+
+  @ViewChild('closeModal') closeModal?: ElementRef;
+
   constructor(
     private apiService: ApiService,
     private currentRoute: ActivatedRoute,
@@ -59,6 +65,28 @@ export class UserComponent implements OnInit {
 
   handleDeleteError(error: Message) {
     this.toastr.error("Error occurred deleting user");
+  }
+
+  handlePasswordUpdateSuccess(message: Message) {
+    this.toastr.success("Password successfully updated!");
+    this.user.password = "";
+    this.user.confirmPassord = "";
+    this.closeModal?.nativeElement.click();
+  }
+
+  handlePasswordUpdateError(error: Message) {
+    this.toastr.error("Error occurred updating password");
+  }
+
+  updatePassword() {
+    if(this.user.password !== this.user.confirmPassord) {
+      this.toastr.error("Password don't match!");
+      return;
+    }
+    this.apiService.updateUserPassword(this.user).subscribe({
+      next: (message) => this.handlePasswordUpdateSuccess(message),
+      error: (error) => this.handleDeleteError(error.error)
+    })
   }
 
 }
