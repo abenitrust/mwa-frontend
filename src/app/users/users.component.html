@@ -4,11 +4,11 @@
     <div class="mt-4 container mx-0 px-0" *ngIf="!error.message">
         <div class="row mx-0 px-0 my-3">
             <label for="searc" class="col-1 offset-5">Search:</label>
-            <input class="col-5" placeHolder="firstName or lastName" name="search" id="search" type="text" [(ngModel)]="search.text">
+            <input class="col-5" placeHolder="firstName or lastName or email" name="search" id="search" type="text" [(ngModel)]="search.text">
             <div class="col-1 text-end px-0">
                 <button 
                     type="button" 
-                    title="Search by first name or last name" 
+                    title="Search by first name\n or last name or email" 
                     class="btn btn-outline btn-sm btn-primary"
                     (click)="searchForUsers()">
                     Search
