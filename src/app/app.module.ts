@@ -18,7 +18,6 @@ import { PagerComponent } from './pager/pager.component';
 import { UsersComponent } from './users/users.component';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { CreateEditUserComponent } from './create-edit-user/create-edit-user.component';
 import { httpInterceptorProviders } from './http-interceptors';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
@@ -36,7 +35,6 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
     UsersComponent,
     UserComponent,
     LoginComponent,
-    RegisterComponent,
     CreateEditUserComponent,
     UnauthorizedComponent
   ],

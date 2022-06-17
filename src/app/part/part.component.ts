@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../api.service';
+import { AuthService } from '../auth.service';
 import { Message } from '../model/message';
 import { Part } from '../model/part';
 
@@ -17,7 +18,8 @@ export class PartComponent implements OnInit {
     private apiService: ApiService,
     private currentRoute: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -59,6 +61,10 @@ export class PartComponent implements OnInit {
 
   handleDeleteError(error: Message) {
     this.toastr.error("Error occurred deleting part");
+  }
+
+  authenticated(): boolean {
+    return this.auth.authenticated();
   }
 
 }

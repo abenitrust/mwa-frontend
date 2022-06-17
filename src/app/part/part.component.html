@@ -50,10 +50,10 @@
                 </dd>
             </dl>
             <div class="action buttons my-3">
-                <button class="btn btn-outline btn-sm btn-warning me-2" (click)="edit(part._id)">
+                <button *ngIf="this.authenticated() === true" class="btn btn-outline btn-sm btn-warning me-2" (click)="edit(part._id)">
                     Edit
                 </button>
-                <button class="btn btn-outline btn-sm btn-danger" (click)="delete(part._id)">
+                <button *ngIf="this.authenticated() === true" class="btn btn-outline btn-sm btn-danger" (click)="delete(part._id)">
                     Delete
                 </button>
             </div>

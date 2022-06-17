@@ -81,7 +81,7 @@ export class CreateEditUserComponent implements OnInit {
   handleCreateSuccess(message: Message) {
     this.error = new Message;
     this.toastr.success("User successfully created!");
-    this.router.navigate(['users']);
+    this.router.navigate(['login']);
   }
 
   handleError(error: any) {
