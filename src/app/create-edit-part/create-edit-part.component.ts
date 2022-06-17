@@ -106,7 +106,6 @@ export class CreateEditPartComponent implements OnInit {
   }
 
   initPart(part: Part) {
-    this.part = part;
     this.part = new Part(
       part._id,
       part.name,

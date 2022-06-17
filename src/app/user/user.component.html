@@ -1,0 +1,30 @@
+<div class="py-1">
+    <h3>User Detail</h3>
+    <h5 class="my-5 text-danger" *ngIf="error.message">{{"Error occurred. Refresh page!"}}</h5>
+    <div class="mt-5" *ngIf="!error.message">
+        <div class="px-0 mx-0 container">
+            <dl class="row">
+                <dt class="col-2">First Name: </dt>
+                <dd class="col-10">
+                    {{user.firstName}}
+            </dl>
+            <dl class="row">
+                <dt class="col-2">Last Name: </dt>
+                <dd class="col-10">{{user.lastName}}</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-2">Email: </dt>
+                <dd class="col-10">{{user.email}}</dd>
+            </dl>
+           
+            <div class="action buttons my-3">
+                <button class="btn btn-outline btn-sm btn-warning me-2" (click)="edit(user._id)">
+                    Edit
+                </button>
+                <button class="btn btn-outline btn-sm btn-danger" (click)="delete(user._id)">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
