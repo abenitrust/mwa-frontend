@@ -103,7 +103,8 @@ export class CreateEditPartComponent implements OnInit {
   }
 
   removeCompatibleModel(compatibleModel: CompatibleModels): void {
-    this.part.compatibleModels = this.part.compatibleModels.filter(cModel => cModel !== compatibleModel)
+    const filteredParts = this.part.compatibleModels.filter(cModel => cModel !== compatibleModel)
+    this.part.compatibleModels = filteredParts;
   }
 
   initPart(part: Part) {

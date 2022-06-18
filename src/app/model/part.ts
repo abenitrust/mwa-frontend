@@ -34,8 +34,8 @@ export class Part {
                     cModel.year
                 )
             )
-            this.#compatibleModels = cModels;
-        })
+        });
+        this.#compatibleModels = cModels;
     }
 
     get compatibleModels(): CompatibleModels[] {

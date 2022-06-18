@@ -3,6 +3,7 @@
         <a routerLink="/parts">Parts</a> <span class="px-3">|</span>
         <span *ngIf="loggedIn() === true"><a routerLink="/parts/0/new">Add Part</a><span class="px-3">|</span></span>   
         <span *ngIf="loggedIn() === true"><a  routerLink="/users">Users</a> <span class="px-3">|</span></span>
+        <span *ngIf="loggedIn() === true"><a routerLink="/register">Add User</a><span class="px-3">|</span></span>   
         <span *ngIf="loggedIn() === false"><a routerLink="/register">Register</a> <span class="px-3">|</span></span>
         <a *ngIf="loggedIn() === false" routerLink="/login">Login</a>
         <button type="button"  *ngIf="loggedIn() === true" 
