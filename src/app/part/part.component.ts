@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 import { ApiService } from '../api.service';
 import { AuthService } from '../auth.service';
 import { Message } from '../model/message';
@@ -40,7 +41,7 @@ export class PartComponent implements OnInit {
   }
 
   handleGetPartError(error: Message) {
-    this.toastr.error(error.error);
+    this.toastr.error(environment.toastMsg.networkIssues);
   }
 
   edit(id: number | string): void {
@@ -55,12 +56,12 @@ export class PartComponent implements OnInit {
   }
 
   handleDeleteSuccess(message: Message) {
-    this.toastr.success("Part successfully deleted");
+    this.toastr.success(environment.toastMsg.partDeleted);
     this.router.navigate(['parts']);
   }
 
   handleDeleteError(error: Message) {
-    this.toastr.error("Error occurred deleting part");
+    this.toastr.error(environment.toastMsg.partCantBeDeleted);
   }
 
   authenticated(): boolean {

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ApiService } from '../api.service';
-import { CompatibleModels } from '../model/compatible-models';
-import { Message } from '../model/message';
 
+import { environment } from 'src/environments/environment';
+
+import { ApiService } from '../api.service';
+import { Message } from '../model/message';
 import { User } from '../model/user';
 
 @Component({
@@ -60,37 +61,37 @@ export class CreateEditUserComponent implements OnInit {
 
   createNewUser(): void {
     if(this.user.password !== this.user.confirmPassord) {
-      this.toastr.error("Password don't match!");
+      this.toastr.error(environment.toastMsg.passwordsDontMatch);
       return;
     }
     this.apiService.addUser(this.user).subscribe({
       next: (message) => this.handleCreateSuccess(message),
-      error: (error) => this.handleError(error.error)
+      error: (error) => this.handleError(environment.toastMsg.userCantBeCreated)
     })
   }
 
   updateExistingUser(): void {
     this.apiService.updateUser(this.user).subscribe({
       next: (message) => this.handleUpdateSuccess(message),
-      error: (error) => this.handleError(error.error)
+      error: (error) => this.handleError(environment.toastMsg.userCantBeUpdated)
     })
   }
 
   handleUpdateSuccess(message: Message) {
     this.error = new Message();
-    this.toastr.success("User successfully updated!")
+    this.toastr.success(environment.toastMsg.userUpdated)
     this.router.navigate(['users', this.userId]);
   }
 
   handleCreateSuccess(message: Message) {
     this.error = new Message;
-    this.toastr.success("User successfully created!");
+    this.toastr.success(environment.toastMsg.userCreated);
     this.router.navigate(['login']);
   }
 
-  handleError(error: any) {
-    this.error = error;
-    this.toastr.error("Error occurred, try again!")
+  handleError(error: string) {
+    this.error.error = error;
+    this.toastr.error(error)
   }
 
   getPageTitle(): string {

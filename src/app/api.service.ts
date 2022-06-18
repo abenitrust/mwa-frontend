@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 import { PartsData, Part } from './model/part';
 import { Message } from './model/message';
@@ -12,11 +13,11 @@ import { User, UsersData } from './model/user';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
-  #baseApiUrl = "http://localhost:5000/api/v1";
-  #partApiUrl = `${this.#baseApiUrl}/parts`;
-  #userApiUrl = `${this.#baseApiUrl}/users`;
-  #authenticationApiUrl = `${this.#baseApiUrl}/authenticate`;
+export class ApiService {  
+  #partApiUrl = environment.partApiUrl;
+  #userApiUrl = environment.userApiUrl;
+  #authenticationApiUrl = environment.authenticationApiUrl;
+  #updatePasswordPath = environment.updatePasswordPath;
 
   constructor(private http: HttpClient) { }
 
@@ -107,7 +108,7 @@ export class ApiService {
   }
 
   updateUserPassword(user: User): Observable<Message> {
-    return this.http.patch<Message>(`${this.#userApiUrl}/${user._id}/change-password`, user)
+    return this.http.patch<Message>(`${this.#userApiUrl}/${user._id}/${this.#updatePasswordPath}`, user)
       .pipe(
         catchError(this.handleError)
       )

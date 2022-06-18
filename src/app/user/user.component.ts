@@ -1,9 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
+import { environment } from 'src/environments/environment';
+
 import { ApiService } from '../api.service';
 import { Message } from '../model/message';
 import { User } from '../model/user';
+
 
 
 
@@ -44,7 +48,7 @@ export class UserComponent implements OnInit {
   }
 
   handleGetUserError(error: Message) {
-    this.toastr.error("Error occurred, try reloading!");
+    this.toastr.error(environment.toastMsg.networkIssues);
   }
 
   edit(id: number | string): void {
@@ -59,28 +63,28 @@ export class UserComponent implements OnInit {
   }
 
   handleDeleteSuccess(message: Message) {
-    this.toastr.success("User successfully deleted");
+    this.toastr.success(environment.toastMsg.userDeleted);
     this.router.navigate(['users']);
   }
 
   handleDeleteError(error: Message) {
-    this.toastr.error("Error occurred deleting user");
+    this.toastr.error(environment.toastMsg.userCantBeDeleted);
   }
 
   handlePasswordUpdateSuccess(message: Message) {
-    this.toastr.success("Password successfully updated!");
+    this.toastr.success(environment.toastMsg.userPasswordUpdated);
     this.user.password = "";
     this.user.confirmPassord = "";
     this.closeModal?.nativeElement.click();
   }
 
   handlePasswordUpdateError(error: Message) {
-    this.toastr.error("Error occurred updating password");
+    this.toastr.error(environment.toastMsg.userPasswordCantBeUpdated);
   }
 
   updatePassword() {
     if(this.user.password !== this.user.confirmPassord) {
-      this.toastr.error("Password don't match!");
+      this.toastr.error(environment.toastMsg.passwordsDontMatch);
       return;
     }
     this.apiService.updateUserPassword(this.user).subscribe({

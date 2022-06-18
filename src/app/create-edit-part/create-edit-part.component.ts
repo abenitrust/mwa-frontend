@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 import { ApiService } from '../api.service';
 import { CompatibleModels } from '../model/compatible-models';
 import { Message } from '../model/message';
@@ -61,32 +62,32 @@ export class CreateEditPartComponent implements OnInit {
   createNewPart(): void {
     this.apiService.addPart(this.part).subscribe({
       next: (message) => this.handleCreateSuccess(message),
-      error: (error) => this.handleError(error.error)
+      error: (error) => this.handleError(environment.toastMsg.partCantBeCreated)
     })
   }
 
   updateExistingPart(): void {
     this.apiService.updatePart(this.part).subscribe({
       next: (message) => this.handleUpdateSuccess(message),
-      error: (error) => this.handleError(error.error)
+      error: (error) => this.handleError(environment.toastMsg.partCantBeUpdated)
     })
   }
 
   handleUpdateSuccess(message: Message) {
     this.error = new Message();
-    this.toastr.success("Part successfully updated!")
+    this.toastr.success(environment.toastMsg.partUpdated)
     this.router.navigate(['parts', this.partId]);
   }
 
   handleCreateSuccess(message: Message) {
     this.error = new Message;
-    this.toastr.success("Part successfully created!");
+    this.toastr.success(environment.toastMsg.partCreated);
     this.router.navigate(['parts']);
   }
 
-  handleError(error: any) {
-    this.error = error;
-    this.toastr.error("Error occurred, try again!")
+  handleError(error: string) {
+    this.error.error = error;
+    this.toastr.error(error);
   }
 
   getPageTitle(): string {
